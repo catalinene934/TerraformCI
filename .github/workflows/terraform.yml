@@ -15,19 +15,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 1. Authenticate to Terraform Cloud (HCP)
+      # 1. Terraform Cloud authentication
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-      # 2. Authenticate to Azure using Service Principal
+      # 2. Azure authentication
       - name: Azure Login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      # 3. Export ARM_* variables so Terraform DOES NOT use Azure CLI
+      # 3. Export ARM_* variables (THIS IS THE CRITICAL PART)
       - name: Set Terraform Azure Credentials
         run: |
           echo "ARM_CLIENT_ID=${{ fromJson(secrets.AZURE_CREDENTIALS).clientId }}" >> $GITHUB_ENV
