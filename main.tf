@@ -33,8 +33,8 @@ resource "azurerm_storage_account" "storage" {
   account_replication_type = "LRS"
 }
 
-resource "azurerm_storage_account" "storage2" {
-  name                     = "testcatenest2221312331"
+resource "azurerm_storage_account" "storage22" {
+  name                     = "testcatenest222331"
   resource_group_name      = azurerm_resource_group.rg.name
   location                 = azurerm_resource_group.rg.location
   account_tier             = "Standard"
