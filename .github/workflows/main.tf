@@ -9,7 +9,7 @@ terraform {
   cloud {
     organization = "catalin-org"
     workspaces {
-      name = "remotestate"
+      name = "TerraformCI"
     }
   }
 }
