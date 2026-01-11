@@ -4,12 +4,6 @@ on:
   push:
     branches: [ "main" ]
     paths: '**.tf'
-  workflow_dispatch:
-    inputs:
-      run_reason:
-        description: 'Optional reason for a manual run'
-        required: false
-        default: 'manual'
 
 permissions:
   contents: read
@@ -18,7 +12,7 @@ jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-
+    
     defaults:
       run:
         shell: bash
@@ -27,11 +21,7 @@ jobs:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3
-      
-    # Install Azure CLI  
-    - name: Install Azure CLI
-      uses: azure/setup-azurecli@v3
-      
+
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
@@ -46,6 +36,6 @@ jobs:
     - name: Terraform Plan
       run: terraform plan -input=false
 
-    # Build or change infrastructure according to Terraform configuration files
+      # Build or change infrastructure according to Terraform configuration files
     - name: Terraform Apply
       run: terraform apply -auto-approve -input=false
