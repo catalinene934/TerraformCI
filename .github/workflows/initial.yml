@@ -1,4 +1,4 @@
-name: 'Terraform'
+name: 'Initial Terraform 1'
 
 on:
   push:
